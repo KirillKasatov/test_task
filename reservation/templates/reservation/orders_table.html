@@ -1,0 +1,9 @@
+{% extends 'django_tables2/bootstrap.html' %}
+
+{% block table.tbody.row %}
+    <tr class="{% cycle "odd" "even" %} {% if row.record.is_archive %}is_archive{% endif %}">
+        {% for column, cell in row.items %}
+            <td {{ column.attrs.td.as_html }}>{{ cell }}</td>
+        {% endfor %}
+    </tr>
+{% endblock table.tbody.row %}

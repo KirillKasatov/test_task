@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% load django_tables2 %}
+{% block title %}{% endblock %}
+{% block style %}
+    <style type="text/css">
+        #orders-table tr.is_archive {
+            color: gray;
+        }
+    </style>
+    {{ filter_form.media }}
+{% endblock %}
+{% block content %}
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#">Главная</a></li>
+        <li><a href="{% url 'order' %}">Создать заказ</a></li>
+    </ul>
+    <div class="clearfix" style="margin-top: 30px;">
+        <form method="GET" action="" class="form-inline" role="form">
+            {% for field in filter_form %}
+                {% bootstrap_field field layout='inline' %}
+            {% endfor %}
+
+            <input type="hidden" name="{{ table.prefixed_order_by_field }}" value="{{ table.order_by }}">
+            <input type="hidden" name="{{ table.prefixed_page_field }}" value="{{ table.page.number }}">
+            {% buttons %}
+
+                <button type="submit" class="btn btn-primary">
+                    {% bootstrap_icon "sunglasses" %} Фильтровать
+                </button>
+
+            {% endbuttons %}
+        </form>
+    </div>
+    <div class="clearfix" style="margin-top: 30px;">
+        {% render_table table %}
+    </div>
+
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $("#id_phone_filter").mask("+7 (999) 999-9999");
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block title %}Создание/редактирование заказа{% endblock %}
+
+{% block content %}
+    <ul class="nav nav-tabs">
+        <li><a href="{% url 'index' %}">Главная</a></li>
+        <li class="active"><a href="#">Создать заказ</a></li>
+    </ul>
+    <div class="clearfix" style="margin-top: 30px;">
+        <form method="post" action="">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% for form in position_formset %}
+                <h2>Товар {{ forloop.counter }}</h2>
+                {% bootstrap_form form %}
+            {% endfor %}
+            {{ position_formset.management_form }}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    {% bootstrap_icon "sunglasses" %} Сохранить
+                </button>
+            {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $("#id_phone").mask("+7 (999) 999-9999");
+        });
+    </script>
+{% endblock %}
