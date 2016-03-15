@@ -9,11 +9,11 @@
 #
 Создать базу данных в PostgreSQL, подключиться к ней, изменив настройки settings.py
 #
-Загрузить фикстуры для наполнения базы данных (в терминале, в каталоге test_task: python manage.py loaddata fixture.json)
-#
 Миграции:
 #
 python manage.py migrate
+#
+Загрузить фикстуры для наполнения базы данных (в терминале, в каталоге test_task: python manage.py loaddata fixture.json)
 #
 Запуск сервера:
 #
